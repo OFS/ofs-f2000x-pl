@@ -1,0 +1,8 @@
+How to view hvp testplan in Verdi?
+
+To do Initial Setup refer README of any varient.
+
+1) Source Verdi licence
+2) Open Verdi with command:-"verdi -cov"
+3) In Verdi window go to "Plan"-> "Open Plan"-> select hvp testplan file-> "Open"
+

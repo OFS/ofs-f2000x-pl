@@ -1,0 +1,14 @@
+[ProjectSettings]
+platform = f2000x
+fim = base_x16
+family = Agilex
+Part = AGFC023R25A2E2VR0
+IpDeployFile = pcie_ss.sh
+IpFile = pcie_ss.ip
+OutputName = soc_pcie_ss
+ComponentName = pcie_ss
+is_host = False
+
+[pf0]
+pg_enable = True
+num_vfs = 3

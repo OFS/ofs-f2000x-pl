@@ -1,0 +1,1103 @@
+
+plan "TOP LEVEL TEST PLAN";
+
+    annotation string TestCatagory = "";
+    annotation string TestName = "";
+    annotation string CheckerDetails = "";
+    annotation string Access = "";
+
+    feature "SOC TESTS";
+        feature "S-1";
+            description = "MMIO targeting PF0(ST2MM, FME, PMCI, QSFP, HSSI SS), PF1, PF2,PF3, PF4, PF1.VF1, PF1.VF2";
+            TestCatagory = "PCIe MMIO Path";
+            TestName = "fm89_mmio_test";
+            CheckerDetails = "data checking";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-2";
+            description = "CSR accesses";
+            TestCatagory = "FME CSR";
+            TestName = "fm89_fme_csr_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-3";
+            description = "CSR accesses";
+            TestCatagory = "PMCI CSR";
+            TestName = "fm89_pmci_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-4";
+            description = "DFH walking";
+            TestCatagory = "DFH";
+            TestName = "fm89_dfh_walking_test";
+            CheckerDetails = "offset checking, eol checking -> tb";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-5";
+            description = "CSR accesses";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-6";
+            description = "CSR accesses";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-7";
+            description = "CSR accesses";
+            TestCatagory = "HSSI";
+            TestName = "fm89_hssi_ss_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-8";
+            description = "CSR accesses";
+            TestCatagory = "QSFP";
+            TestName = "fm89_qsfp_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-9";
+            description = "Loopback mode.  Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_test";
+            CheckerDetails = "data checking, counter checking";
+        endfeature
+        feature "S-10";
+            description = "Apply FLR Reset for PF0 and deassert.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF0 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+            TestCatagory = "PF0 FLR Reset";
+            TestName = "fm89_afu_mmio_soc_flr_pf0_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_TX_COMPL";
+            endmeasure
+        endfeature
+        feature "S-11";
+            description = "Apply FLR Reset for PF0_VF0 and deassert.";
+            TestCatagory = "PF0_VF0_FLR Reset";
+            TestName = "fm89_afu_mmio_soc_flr_pf0_vf0_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-12";
+            description = "Apply FLR Reset for PF0_VF1 and deassert.";
+            TestCatagory = "PF0_VF1_FLR Reset";
+            TestName = "fm89_afu_mmio_soc_flr_pf0_vf1_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-13";
+            description = "Apply FLR Reset for PF0_VF2 and deassert.";
+            TestCatagory = "PF0_VF2_FLR Reset";
+            TestName = "fm89_afu_mmio_soc_flr_pf0_vf2_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-14";
+            description = "CSR accesses";
+            TestCatagory = "PMCI QSFP CSR";
+            TestName = "fm89_pmci_qsfp_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-15";
+            description = "CSR accesses";
+            TestCatagory = "PMCI FME CSR";
+            TestName = "fm89_pmci_fme_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-16";
+            description = "CSR accesses";
+            TestCatagory = "PMCI PCIESS CSR";
+            TestName = "fm89_pmci_pciess_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-17";
+            description = "CSR access";
+            TestCatagory = "PORT GASKET";
+            TestName = "fm89_port_gasket_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-18";
+            description = "CSR access";
+            TestCatagory = "MEM-TG";
+            TestName = "fm89_mem_tg_csr_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-19";
+            numbering = 19;
+            TestCatagory = "MEM-TG";
+            TestName = "fm89_mem_tg_ch_hop_test";
+        endfeature
+        feature "S-20";
+            TestCatagory = "MEM-TG";
+            TestName = "fm89_mem_tg_data_test";
+            CheckerDetails = "data checking";
+        endfeature
+        feature "S-21";
+            description = "CSR access";
+            TestCatagory = "EMIF";
+            TestName = "fm89_emif_csr_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::EMIF_CHANNEL";
+            endmeasure
+        endfeature
+        feature "S-22";
+            description = "Read only mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_rd_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+            endmeasure
+        endfeature
+        feature "S-23";
+            description = "Write only mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_wr_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+            endmeasure
+        endfeature
+        feature "S-24";
+            description = "Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_thruput_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_testmode";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_tput";
+            endmeasure
+        endfeature
+        feature "S-25";
+            description = "Multiple iterations of he_lpb_seq with STOP HE-LB in middle.";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_long_test";
+            CheckerDetails = "data checking, counter checking";
+        endfeature
+        feature "S-26";
+            description = "Multiple iterations of he_lpb_seq with soft reset HE-LB in middle.";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_long_rst_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+        endfeature
+        feature "S-27";
+            description = "Continuous mode/LPBK mode, random num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_cont_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_con_mode";
+            endmeasure
+        endfeature
+        feature "S-28";
+            description = "Read only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_rd_cont_test.svh";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+            endmeasure
+        endfeature
+        feature "S-29";
+            description = "Write only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_wr_cont_test.svh";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+            endmeasure
+        endfeature
+        feature "S-30";
+            description = "Continuous mode, Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_thruput_contmode_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_con_mode_testmode";
+            endmeasure
+        endfeature
+        feature "S-31";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_thruput_contmode_directed_test";
+            CheckerDetails = "data checking, counter checking";
+        endfeature
+        feature "S-32";
+            description = "Loopback mode. 128 CLs, req_len = 1CL, random addresses.";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_reqlen1_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+            endmeasure
+        endfeature
+        feature "S-33";
+            description = "Loopback mode. 128 CLs, req_len = 2CL, random addresses.";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_reqlen2_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+            endmeasure
+        endfeature
+        feature "S-34";
+            description = "Loopback mode. 128 CLs, req_len = 4CL, random addresses.";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_lpbk_reqlen4_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_MEM.MEM_reqlen";
+            endmeasure
+        endfeature
+        feature "S-35";
+            description = "Single User interrupt request from HE MEM";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_he_mem_user_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::INTR_VECTOR.TX_user_vector";
+            endmeasure
+        endfeature
+        feature "S-36";
+            description = "Back to back multiple User interrupt request from HE MEM";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_he_mem_multi_user_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read for multiple back to back request.";
+        endfeature
+        feature "S-37";
+            description = "Introducing CSR num lines error case, to hit bit 0 of ERROR(0x0170) register";
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_err_test";
+        endfeature
+        feature "S-38";
+            description = "Test covers the flow which covers one back for agilex variant\nCovers the traffic generator test flow as mentioned in HAS";
+            TestCatagory = "MEM-TG";
+            TestName = "fm89_mem_tg_traffic_gen_test";
+        endfeature
+        feature "S-39";
+            description = "Earlier msix registers were in fme block but now it has moved from fme to pciess.Hence coded a seperate test for msix.";
+            TestCatagory = "PCIESS";
+            TestName = "fm89_msix_csr_test";
+        endfeature
+        feature "S-40";
+            description = "64-bit bar addess for MMIO";
+            TestCatagory = "PCIe MMIO Path";
+            TestName = "fm89_64b_bar_test";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_TX_COMPL";
+            endmeasure
+        endfeature
+        feature "S-41";
+            description = "32-bit bar addess for MMIO";
+            TestCatagory = "PCIe MMIO Path";
+            TestName = "fm89_32b_bar_test";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_TX_COMPL";
+            endmeasure
+        endfeature
+        feature "S-42";
+            description = "Stressing MMIO on PF/VF Mux/Demux";
+            TestCatagory = "PF/VF Mux/Demux";
+            TestName = "fm89_mmio_stress_test";
+            CheckerDetails = "data checking";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-43";
+            description = "Stressing MMIO on PF/VF Mux/Demux with non-blocking MMIO reads";
+            TestCatagory = "PF/VF Mux/Demux";
+            TestName = "fm89_mmio_stress_nonblocking_test";
+            CheckerDetails = "data checking";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-44";
+            description = "Random length  mmio Write";
+            TestCatagory = "PCIe - Max Payload/Max Read Req Size";
+            TestName = "fm89_mmio_pcie_mrrs_128B_mps_128B_test";
+            CheckerDetails = "Checking valid possible combination of MPS & MRRS";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-45";
+            description = "Random length  mmio Write";
+            TestCatagory = "PCIe - Max Payload/Max Read Req Size";
+            TestName = "fm89_mmio_pcie_mrrs_128B_mps_256B_test";
+            CheckerDetails = "Checking valid possible combination of MPS & MRRS";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-46";
+            description = "Random length  mmio Write";
+            TestCatagory = "PCIe - Max Payload/Max Read Req Size";
+            TestName = "fm89_mmio_pcie_mrrs_256B_mps_128B_test";
+            CheckerDetails = "Checking valid possible combination of MPS & MRRS";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-47";
+            description = "Random length in mmio Read";
+            TestCatagory = "PCIe - Max Payload/Max Read Req Size";
+            TestName = "fm89_mmio_pcie_mrrs_256B_mps_256B_test";
+            CheckerDetails = "Checking valid possible combination of MPS & MRRS";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-48";
+            description = "1. Initiate transactions to all the supported PF/VF from PCIE VIP and ensure that traffic is sent to all blocks of the AFU.\n2. Ensure that CE/HE-LB/HE-MEM/HSSI/BPF/FME are seeing traffic .\n3. Ensure that HE-LB/HE-MEM/CE sends DMWR/DMRD requests to PCIE VIP\n4. Ensure the Mux/DeMux blocks is able to handle the traffic based on the PF's/VF's and proper muxing/demuxing happens.";
+            TestCatagory = "AFU-Stress";
+            TestName = "fm89_afu_stress_test\nfm89_afu_stress_5bit_tag_test\nfm89_afu_stress_8bit_tag_test";
+            CheckerDetails = "Data checking";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+            measure Group Measure_3;
+                source = "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_0";
+            endmeasure
+        endfeature
+        feature "S-49";
+            description = "Enable all HEs and randomize modes";
+            TestCatagory = "All HEs";
+            TestName = "fm89_he_random_test";
+            CheckerDetails = "data checking if in lpbk mode, counter checking";
+            Access = "Can be accessed from both SOC and HOST";
+        endfeature
+        feature "S-50";
+            description = "FME interrupt request using RAS ERROR assertion";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_fme_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-51";
+            description = "FME Interrupt request using FME ERROR assertion";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_fme_err_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-52";
+            description = "FME interrupt request using RAS ERROR and FME ERROR assertion";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_fme_multi_err_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read plus verifying interrupt requests generated from FME and RAS ERROR bits.";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-53";
+            description = "Apply FLR Reset.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF0 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+            TestCatagory = "FLR Reset";
+            TestName = "fm89_afu_mmio_flr_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+            Access = "Can be accessed from both SOC and HOST";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_TX_COMPL";
+            endmeasure
+        endfeature
+        feature "S-54";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port0  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p0_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-55";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port1  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p1_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-56";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port2  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p2_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-57";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port3  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p3_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-58";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port4  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p4_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-59";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port5  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p5_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-60";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port6  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p6_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-61";
+            description = "Send back to back traffic with 25G speed on HSSI TX Port7  lanes using Traffic generator registers";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_lpbk_p7_test";
+            CheckerDetails = "Check the CRC errors on loopback packets on Traffic Monitor Registers .";
+        endfeature
+        feature "S-62";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port0";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L0_test";
+        endfeature
+        feature "S-63";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port0";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L1_test";
+        endfeature
+        feature "S-64";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port2";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L2_test";
+        endfeature
+        feature "S-65";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port3";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L3_test";
+        endfeature
+        feature "S-66";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port4";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L4_test";
+        endfeature
+        feature "S-67";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port5";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L5_test";
+        endfeature
+        feature "S-68";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port6";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L6_test";
+        endfeature
+        feature "S-69";
+            description = "TestCase is added to cover the TM_AVST_RX_ERR Register for HSSI Port7";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_tx_err_L7_test";
+        endfeature
+        feature "S-70";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_axis_rx_lpbk_test";
+        endfeature
+        feature "S-71";
+            description = "Sending back to back ethernet data traffic with 25G speed on HSSI RX Port0-7 lanes using Ethernet VIPs";
+            TestCatagory = "HE-HSSI";
+            TestName = "fm89_he_hssi_rx_lpbk_25G_10G_test";
+            CheckerDetails = "Enable the loopback mode in HE-HSSI and compare the pkts recived on HSSI TX Port(DATA CHECKING)";
+        endfeature
+        feature "S-72";
+            description = "shorter simpler version of random test for turn-in sanity check";
+            TestCatagory = "All HEs";
+            TestName = "fm89_mini_smoke_test";
+            CheckerDetails = "data checking if in lpbk mode, counter checking";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_001";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::EMIF_CHANNEL.EMIF_capability.onechannel";
+            endmeasure
+        endfeature
+        feature "S-73";
+            description = "Mix interrupt testcase to send multiple FME and User interrupt request simultaneously";
+            TestCatagory = "Interrupt";
+            TestName = "fm89_mix_intr_test";
+            CheckerDetails = "Test checks for interrupt assertion, deassertion, mask feature, PBA bits and MSIX host memory data integrity through backdoor memory read plus verifying interrupt requests through different sources - FME and HE-MEM modules";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-74";
+            TestCatagory = "All Unimplimented addresses";
+            TestName = "fm89_mmio_unimp_test";
+        endfeature
+        feature "S-75";
+            description = "Genrate CRCCAT error and Fabric Fatal Error";
+            TestCatagory = "FME CSR";
+            TestName = "fm89_fme_ras_cat_fat_err_test";
+            CheckerDetails = "Generate the respective RAS error and check the MSI assertion and error logging";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-76";
+            description = "Genrate No_fatal ,warning Error";
+            TestCatagory = "FME CSR";
+            TestName = "fm89_fme_ras_no_fat_err_test";
+            CheckerDetails = "Generate the respective RAS error and check the MSI assertion and error logging";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[1]";
+            endmeasure
+        endfeature
+        feature "S-77";
+            TestCatagory = "UART";
+            TestName = "fm89_uart_intr_test";
+        endfeature
+        feature "S-78";
+            TestCatagory = "Protocol Checker csr";
+            TestName = "fm89_protocol_checker_csr_test";
+        endfeature
+        feature Feature_18;
+            TestCatagory = "HE-MEM";
+            TestName = "fm89_he_mem_flr_rst_test";
+        endfeature
+        feature "S-79";
+            description = "Checks for different PCIe Protocol error generation (upstram/downstream) and check the clear mechanism of AFU for these detected protocol errors.\n1. Apply the error.\n2. Wait 5us 1us\n3. Set the port reset bit true and then false again (within 1us) (You will not be able to perform a read-modify-write because F’s will be retuened on resds. Write a 0x5 to set and a 0x4 to clear).\n4. Wait 124us 135us (or 7.5us 28us if MMIO_TIMEOUT_CYCLES is 512.)\n5. Read bit 31 of the AFU_INTF_ERROR, BlockingTraffic. If it is set it means that we did not wait long enough in step 4.\n6. Read the AFU_INTF_ERROR  register, Be sure only the expected error(s) are set.\n7. Read the AFU_INTF_FIRST_ERROR  CSR. Be sure only one error bit is set and it is the expected one.\n8. Clear the errors in the AFU_INTF_ERROR  CSR by writing one to the bits that are set.\n9. Read the AFU_INTF_FIRST_ERROR  CSR. Be sure all bits are cleared";
+            TestCatagory = "Protocol Checker";
+            TestName = "fm89_MaxTagError_test
+fm89_TxMWrDataPayloadOverrun_test
+fm89_TxMWrInsufficientData_test
+fm89_maxpayloaderror_test
+fm89_malformedtlp_pcie_rst_test
+fm89_malformedtlp_test
+fm89_MaxReadReqSizeError_test
+fm89_MMIODataPayloadOverrun_test
+fm89_MMIOInsufficientData_test
+fm89_MMIOTimedout_test
+fm89_UnexpMMIORspErr_test
+";
+            CheckerDetails = "1.Check AFU_INTF_ERROR and AFU_INTF_FIRST_ERROR register is getting set with correct error vector.
+2.After clearing the error register ,check if normal transcation are completing.";
+        endfeature
+    endfeature
+    feature "HOST TESTS";
+        feature "H-1";
+            description = "Read only mode. Randomize num_lines, addresses, req_len";
+            numbering = 1;
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_rd_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+        endfeature
+        feature "H-2";
+            description = "Write only mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_wr_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+            endmeasure
+        endfeature
+        feature "H-3";
+            description = "Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_thruput_test";
+            CheckerDetails = "counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_tput";
+            endmeasure
+        endfeature
+        feature "H-4";
+            description = "Multiple iterations of he_lpb_seq with STOP HE-LB in middle.";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_long_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+        endfeature
+        feature "H-5";
+            description = "Multiple iterations of he_lpb_seq with soft reset HE-LB in middle.";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_long_rst_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+            measure Group Measure_3;
+                source = "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_0";
+            endmeasure
+        endfeature
+        feature "H-6";
+            description = "Continuous mode/LPBK mode, random num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_cont_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_con_mode";
+            endmeasure
+        endfeature
+        feature "H-7";
+            description = "Read only mode/ Continuous mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_rd_cont_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode", "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_1";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+        endfeature
+        feature "H-8";
+            description = "Continuous mode, Read/Write mode. 50/50. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_thruput_contmode_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode", "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_1";
+            endmeasure
+        endfeature
+        feature "H-9";
+            description = "Write only mode/Continuous mode. Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_wr_cont_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_con_mode_testmode", "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_1";
+            endmeasure
+        endfeature
+        feature "H-10";
+            description = "Loopback mode. 128 CLs, req_len = 1CL, random addresses.";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_reqlen1_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+            measure Group Measure_3;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+        endfeature
+        feature "H-11";
+            description = "Loopback mode. 128 CLs, req_len = 2CL, random addresses.";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_reqlen2_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+            measure Group Measure_3;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+        endfeature
+        feature "H-12";
+            description = "Loopback mode. 128 CLs, req_len = 4CL, random addresses.";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_reqlen4_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_reqlen";
+            endmeasure
+            measure Group Measure_2;
+                source = "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_tag", "group: $unit::ofs_coverage::AXI_RX_COMPL.RX_DM_cmpl_len", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_PU_cmpl_len.len_pu_002", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0", "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_type.cmp_typ_4a";
+            endmeasure
+        endfeature
+        feature "H-13";
+            description = "HE-LB; ReqLen = 1CL; 1024 CLs; Read only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_rd_1cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-14";
+            description = "HE-LB; ReqLen = 2CL; 1024 CLs; Read only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_rd_2cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-15";
+            description = "HE-LB; ReqLen = 4CL; 1024 CLs; Read only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_rd_4cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-16";
+            description = "HE-LB; ReqLen = 1CL; 1024 CLs; Write only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_wr_1cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-17";
+            description = "HE-LB; ReqLen = 2CL; 1024 CLs; Write only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_wr_2cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-18";
+            description = "HE-LB; ReqLen = 4CL; 1024 CLs; Write only mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_wr_4cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-19";
+            description = "HE-LB; ReqLen = 1CL; 1024 CLs; Thruput mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_thruput_1cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-20";
+            description = "HE-LB; ReqLen = 2CL; 1024 CLs; Thruput mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_thruput_2cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-21";
+            description = "HE-LB; ReqLen = 4CL; 1024 CLs; Thruput mode";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_thruput_4cl_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-22";
+            description = "HE-LB; ReqLen = 4CL; 1024 CLs; Thruput mode, Enabling 5 bit tag";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_thruput_4cl_5bit_tag_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-23";
+            description = "HE-LB; ReqLen = 4CL; 1024 CLs; Thruput mode, Enabling 8 bit tag.";
+            TestCatagory = "Performance";
+            TestName = "fm89_helb_thruput_4cl_8bit_tag_test";
+            CheckerDetails = "Measure the performance";
+        endfeature
+        feature "H-24";
+            description = "Introducing CSR num lines error case, to hit bit 0 of ERROR(0x0170) register";
+            TestCatagory = "HE_LPBK";
+            TestName = "fm89_he_lpbk_err_test";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_0";
+            endmeasure
+        endfeature
+        feature "H-25";
+            description = "Accessing the pcie_csr registers from host; from PMCI it is already covered in n6000_pmci_pciess_csr";
+            TestCatagory = "PCIESS";
+            TestName = "fm89_host_pcie_csr_test";
+        endfeature
+        feature "H-26";
+            description = "Accessing the pcie_csr registers from host; from PMCI it is already covered in n6000_pmci_pciess_csr";
+            TestCatagory = "PCIESS";
+            TestName = "fm89_pcie_csr_test";
+        endfeature
+        feature "H-27";
+            description = "CSR accesses";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_csr_test";
+            CheckerDetails = "data checking";
+            measure Group Measure_1;
+                source = "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_0", "group bin: $unit::ofs_coverage::HE_LBK.LBK_con_mode.conmode_1";
+            endmeasure
+        endfeature
+        feature "H.28";
+            description = "Loopback mode.  Randomize num_lines, addresses, req_len";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_test";
+            CheckerDetails = "data checking, counter checking";
+            measure Group Measure_1;
+                source = "group: $unit::ofs_coverage::HE_LBK.LBK_testmode";
+            endmeasure
+            measure Group Measure_2;
+                source = "group bin: $unit::ofs_coverage::AXI_RX_COMPL.RX_compl_status.cmp_stat_0";
+            endmeasure
+            measure Group Measure_3;
+                source = "group bin: $unit::ofs_coverage::INTR_VECTOR.TX_fme_vector.auto[0]";
+            endmeasure
+        endfeature
+        feature "H-29";
+            description = "Apply FLR Reset for PF2 and deassert.\nInitiate MMIO transactions for all PFs. Make sure all completions are sent/received and no pending transations are seen. Apply FLR Reset for PF1 and deassert. Initiate mmio access and ensure all PFs CSR access are working fine";
+            TestCatagory = "PF1 FLR Reset";
+            TestName = "fm89_afu_mmio_host_flr_pf1_test";
+            CheckerDetails = "Initiate mmio access before and after FLR Reset and ensure all PF/VFs CSR access are working fine";
+        endfeature
+        feature "H-30";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_multi_user_intr_test";
+        endfeature
+        feature "H-31";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_user_intr_test";
+        endfeature
+        feature "H-32";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "MCTP";
+            TestName = "fm89_pcie_pmci_mctp_multi_vdm_test";
+            CheckerDetails = "MCTP PCIe VDM (Vendor Defined Message) multiple packets received from PCIe HIA subsystem to PMCI controller over APF and BPF via AXI4-lite memory write request.";
+        endfeature
+        feature "H-33";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "MCTP";
+            TestName = "fm89_pmci_pcie_mctp_multi_vdm_test";
+            CheckerDetails = "MCTP PCIe VDM multiple packets received from PMCI controller over APF and BPF to PCIe HIA subsystem";
+        endfeature
+        feature "H-34";
+            description = "vendor specific messaging capability";
+            TestCatagory = "MCTP";
+            TestName = "fm89_pcie_pmci_mctp_vdm_test";
+            CheckerDetails = "MCTP PCIe VDM (Vendor Defined Message) single packet received from PCIe HIA subsystem to PMCI controller over APF and BPF via AXI4-lite memory write request.";
+        endfeature
+        feature "H-35";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "MCTP";
+            TestName = "fm89_pmci_pcie_mctp_vdm_test";
+            CheckerDetails = "MCTP PCIe VDM single packet received from PMCI controller over APF and BPF to PCIe HIA subsystem";
+        endfeature
+        feature "H-36";
+            TestCatagory = "MCTP";
+            TestName = "fm89_pcie_pmci_mctp_256DW_test";
+        endfeature
+        feature "H-37";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "VDM";
+            TestName = " fm89_vdm_err_vid_test";
+        endfeature
+        feature "H-38";
+            TestCatagory = "HE-LPBK";
+            TestName = "fm89_he_lpbk_flr_rst_test";
+        endfeature
+    endfeature
+    feature "SOC UNIT TESTS";
+        feature "S.U-1";
+            TestCatagory = "Unit test";
+            TestName = "csr_test";
+        endfeature
+        feature "S.U-2";
+            TestCatagory = "DFH Unit_test";
+            TestName = "dfh_walker";
+        endfeature
+        feature "S.U-3";
+            TestCatagory = "HE-LPBK Unit_test";
+            TestName = "he_lb_test";
+        endfeature
+        feature "S.U-4";
+            TestCatagory = "HE-MEM Unit_test";
+            TestName = "he_mem_test";
+        endfeature
+        feature "S.U-5";
+            TestCatagory = "HSSI Unit_test";
+            TestName = "hssi_test";
+        endfeature
+        feature "S.U-6";
+            TestCatagory = "HSSI Unit_test";
+            TestName = "hssi_kpi_test";
+        endfeature
+        feature "S.U-7";
+            TestCatagory = "FLR Unit_test";
+            TestName = "flr";
+        endfeature
+        feature "S.U-8";
+            TestCatagory = "MEM-SS Unit_test";
+            TestName = "mem_ss_csr_test";
+        endfeature
+        feature "S.U-9";
+            TestCatagory = "MEM-SS Unit_test";
+            TestName = "mem_ss_rst_test";
+        endfeature
+        feature "S.U-10";
+            TestCatagory = "MEM-TG Unit_test";
+            TestName = "mem_tg_test";
+        endfeature
+        feature "S.U-11";
+            TestCatagory = "QSFP Unit_test";
+            TestName = "qsfp_test";
+        endfeature
+    endfeature
+    feature "HOST UNIT TESTS";
+        feature "H.U-1";
+            TestCatagory = "Unit test";
+            TestName = "csr_test";
+        endfeature
+        feature "H.U-2";
+            TestCatagory = "HE-LBK Unit test";
+            TestName = "he_lb_test";
+        endfeature
+        feature "H.U-3";
+            TestCatagory = "PCIE Unit test";
+            TestName = "pcie_csr_test";
+        endfeature
+        feature "H.U-4";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_csr_test";
+        endfeature
+        feature "H.U-5";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_fbm_fifo_overflow_test";
+        endfeature
+        feature "H.U-6";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_fbm_fifo_underflow_test";
+        endfeature
+        feature "H.U-7";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_fbm_fifo_wr_rd_test";
+        endfeature
+        feature "H.U-8";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_test";
+        endfeature
+        feature "H.U-9";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_511dw_test";
+        endfeature
+        feature "H.U-10";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_63dw_test";
+        endfeature
+        feature "H.U-11";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_random_test";
+        endfeature
+        feature "H.U-12";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_rsu_test";
+        endfeature
+        feature "H.U-13";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_wo_rdmode_test";
+        endfeature
+        feature "H.U-14";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_flash_wr_rd_wo_rsu_test";
+        endfeature
+        feature "H.U-15";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_mailbox_test";
+        endfeature
+        feature "H.U-16";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_multi_master_test";
+        endfeature
+        feature "H.U-17";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_pxeboot_test";
+        endfeature
+        feature "H.U-18";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_qsfp_telemetry_test";
+        endfeature
+        feature "H.U-19";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_rd_default_value_test";
+        endfeature
+        feature "H.U-20";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_ro_mailbox_test";
+        endfeature
+        feature "H.U-21";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_b2b_drop_err_scenario_test";
+        endfeature
+        feature "H.U-22";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_len_err_scenario_test";
+        endfeature
+        feature "H.U-23";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "MCTP Unit test";
+            TestName = "pmci_vdm_mctp_mmio_b2b_test";
+        endfeature
+        feature "H.U-24";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_multipkt_error_scenario_test";
+        endfeature
+        feature "H.U-25";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_multipkt_tlp_err_test";
+        endfeature
+        feature "H.U-26";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_tlp_error_scenario_test";
+        endfeature
+        feature "H.U-27";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_tx_rx_all_random_lpbk_test";
+        endfeature
+        feature "H.U-28";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_tx_rx_all_toggle_test";
+        endfeature
+        feature "H.U-30";
+            description = "Vendor specific messaging capability";
+            TestCatagory = "PMCI Unit test";
+            TestName = "pmci_vdm_tx_rx_lpbk_test";
+        endfeature
+    endfeature
+    feature "ADDITIONAL TESTS";
+        feature "S-52";
+            TestCatagory = "QSFP";
+            TestName = "qsfp_init_test
+qsfp_pio_output_toggle_parallel_test
+qsfp_pio_input_toggle_parallel_test
+qsfp_pio_output_toggle_sanity_test
+qsfp_pio_input_toggle_sanity_test
+qsfp_i2c_read_write_b2b_test
+qsfp_poller_reset_test
+qsfp_por_register_test
+qsfp_read_write_register_test
+qsfp_i2c_read_write_sanity_lower_upper_page_test
+qsfp_softreset_test
+qsfp_i2c_poller_disable_test
+qsfp_write_reset_test
+qsfp_backpress_dut_test
+qsfp_i2c_read_write_sanity_page0203_test
+qsfp_i2c_read_write_sanity_page2021_test
+qsfp_nack_det_test
+qsfp_dis_wait_test
+qsfp_i2c_write_rand_read_test";
+        endfeature
+    endfeature
+endplan
+
