@@ -1,0 +1,6 @@
+apf/**/*
+bpf/**/*
+ip/apf/*/**/*
+ip/bpf/*/**/*
+soc_apf/**/*
+ip/soc_apf/*/**/*
