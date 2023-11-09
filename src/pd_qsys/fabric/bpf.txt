@@ -1,0 +1,16 @@
+#### - '#' means comment
+# NAME   TYPE      BASEADDRESS    ADDRESS_WIDTH    SLAVES
+apf         mst     n/a             21             fme,soc_pcie,hssi,qsfp0,qsfp1,emif,pmci
+host_apf    mst     n/a             21             pcie,pmci
+fme 	    mst     n/a             21             soc_apf
+pmci        mst     n/a             22             host_apf,qsfp0,qsfp1,hssi,soc_pcie,fme
+pcie        slv     0x00000         12             n/a
+fme         slv     0x00000         16             n/a
+soc_apf     slv     0x00000         21             n/a
+soc_pcie    slv     0x10000         12             n/a
+qsfp0       slv     0x12000         12             n/a
+qsfp1       slv     0x13000         12             n/a
+hssi        slv     0x14000         12             n/a
+emif        slv     0x15000         12             n/a
+pmci        slv     0x80000         19             n/a
+host_apf    slv     0x200000        21             n/a
