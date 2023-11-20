@@ -6,7 +6,7 @@ This is the OFS f2000x development top-level directory.
 * f2000x 
    - Default .ip parameters are based on f2000x design
     ```bash
-        ./ofs-common/scripts/common/syn/build_top.sh -p f2000x work_f2000x
+        ./ofs-common/scripts/common/syn/build_top.sh -p --ofss tools/ofss_config/f2000x.ofss,tools/ofss_config/hssi/hssi_8x25.ofss f2000x work_f2000x
     ```
    - Additionally, f2000x fim supports reconfiguring the .ip via .ofss flow. For
      example to change hssi config, pass the .ofss files below. 
