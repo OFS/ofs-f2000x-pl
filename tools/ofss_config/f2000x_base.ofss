@@ -1,0 +1,10 @@
+[ip]
+type = ofs
+
+[settings]
+platform = f2000x
+fim = base_x16
+family = agilex
+part = AGFC023R25A2E2VR0
+device_id = 6100
+

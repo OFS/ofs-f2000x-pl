@@ -1,0 +1,8 @@
+#### - '#' means comment
+# NAME   TYPE      BASEADDRESS    ADDRESS_WIDTH    SLAVES
+bpf         mst     n/a             21             st2mm
+st2mm       mst     n/a             21             achk,bpf,st2mm,pr
+bpf         slv     0x00000         20             n/a
+st2mm       slv     0x100000        16             n/a
+pr          slv     0x130000        16             n/a
+achk        slv     0x140000        16             n/a

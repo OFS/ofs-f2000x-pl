@@ -1,0 +1,10 @@
+[ip]
+type = pcie
+
+[settings]
+output_name = soc_pcie_ss
+
+[pf0]
+num_vfs = 3
+bar0_address_width = 21
+vf_bar0_address_width = 21
