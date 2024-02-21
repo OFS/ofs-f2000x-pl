@@ -35,7 +35,7 @@
 `include "ral_ac_pmci.sv"
 `include "ral_ac_AFU_INTF.sv"
 `include "ral_ac_msix.sv"
-`include "ral_ac_src_port_gasket_Agilex_PG.sv"
+`include "ral_ac_src_port_gasket_agilex_pg.sv"
 
 `else
 
@@ -60,7 +60,7 @@
 `include "ral_ac_pmci_cov.sv"
 `include "ral_ac_AFU_INTF_cov.sv"
 `include "ral_ac_msix_cov.sv"
-`include "ral_ac_src_port_gasket_Agilex_PG_cov.sv"
+`include "ral_ac_src_port_gasket_agilex_pg_cov.sv"
 
 `endif
 
@@ -85,7 +85,7 @@ rand ral_block_ac_AFU_INTF  afu_intf_regs;
 rand ral_block_ac_msix      msix_regs;
 rand ral_block_ac_msix      msix_regs_pf0_vf0;
 rand ral_block_ac_msix      host_msix_regs_pf1;
-rand ral_block_ac_src_port_gasket_Agilex_PG     pr_gasket_regs;
+rand ral_block_ac_src_port_gasket_agilex_pg     pr_gasket_regs;
 `ifndef AGILEX
 rand ral_block_ac_emif      emif_regs;
 rand ral_block_ac_mem_tg    mem_tg_regs;
@@ -251,7 +251,7 @@ virtual function void build();
     host_msix_regs_pf1.lock_model(); 
 
 
-    pr_gasket_regs =ral_block_ac_src_port_gasket_Agilex_PG::type_id::create("pg");
+    pr_gasket_regs =ral_block_ac_src_port_gasket_agilex_pg::type_id::create("pg");
     pr_gasket_regs.configure(this);
     pr_gasket_regs.build();
     pr_gasket_map.add_submap(this.pr_gasket_regs.default_map,PORT_GASKET_BASE_ADDR);

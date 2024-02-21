@@ -87,7 +87,7 @@ class tb_env extends uvm_env;
    ral_block_ac_msix      msix_regs;  
    ral_block_ac_msix      msix_regs_pf0_vf0;  
    ral_block_ac_msix      host_msix_regs_pf1;  
-   rand ral_block_ac_src_port_gasket_Agilex_PG     pr_gasket_regs;
+   rand ral_block_ac_src_port_gasket_agilex_pg     pr_gasket_regs;
 
    ral_block_ac_emif      emif_regs;
    ral_block_ac_mem_tg    mem_tg_regs;

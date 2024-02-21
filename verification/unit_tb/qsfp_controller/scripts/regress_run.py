@@ -668,7 +668,7 @@ def send_email_report():
         receiver_email = user_name
 
     message = MIMEMultipart()
-    message["Subject"] = f"UVM Regression results for QSFP UNIT level TB UVM simulations"
+    message["Subject"] = f"[F2000X] UVM Regression results for QSFP UNIT level TB UVM simulations"
     message["From"] = sender_email
     if args.email_list:
         message["To"]   = ", ".join(receiver_email)
