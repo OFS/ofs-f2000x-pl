@@ -474,13 +474,13 @@ task test_mmio_burst;
    Transaction      #(pf_type, vf_type, pf_list, vf_list) rt_queue[$];
    Transaction      #(pf_type, vf_type, pf_list, vf_list) rt_match_queue[$];
    string access_source;
-   bit [3:0] first_dw_be = 4'b1111;
-   bit [3:0] last_dw_be  = 4'b1111;
+   static bit [3:0] first_dw_be = 4'b1111;
+   static bit [3:0] last_dw_be  = 4'b1111;
    byte_t write_data[];
    byte_t read_data[];
    bit [31:0] wdata;
    bit [31:0] rdata;
-   int burst_num = 128;
+   static int burst_num = 128;
 begin
    print_test_header(test_name);
    old_test_err_count = get_err_count();

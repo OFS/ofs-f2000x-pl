@@ -87,6 +87,7 @@ fi
 #sed -i 's,'.*\/pcie_top.sv',$OFS_ROOTDIR/sim/bfm/rp_bfm_simple/pcie_top.sv,' ${SIM_DIR}/rtl_pcie.f
 #sed -i 's,'.*\/axi_s_adapter.sv',$OFS_ROOTDIR/sim/bfm/rp_bfm_simple/axi_s_adapter.sv,' ${SIM_DIR}/rtl_pcie.f
 #sed -i 's,'.*\/pcie_csr.sv',$OFS_ROOTDIR/sim/bfm/rp_bfm_simple/pcie_csr.sv,' ${SIM_DIR}/rtl_pcie.f
+sed -i 's,'.*\/pcie_wrapper.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_wrapper.sv,' ${SIM_DIR}/rtl_pcie.f
 sed -i 's,'.*\/pcie_top.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_top.sv,' ${SIM_DIR}/rtl_pcie.f
 sed -i 's,'.*\/axi_s_adapter.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/axi_s_adapter.sv,' ${SIM_DIR}/rtl_pcie.f
 sed -i 's,'.*\/pcie_csr.sv',$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pcie_csr.sv,' ${SIM_DIR}/rtl_pcie.f

@@ -558,7 +558,7 @@ task create_vdm_multimsg_err_packet;
    bit local_som;
    bit local_eom;
    bit [1:0] local_psn;
-   logic [31:0] msg_word  = 32'hC0DE_1234;
+   static logic [31:0] msg_word  = 32'hC0DE_1234;
    logic [31:0] msg_words[$];
 begin 
    local_som = upper_msg[7];

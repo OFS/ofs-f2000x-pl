@@ -562,7 +562,7 @@ task create_vdm_multimsg_err_packet;
    bit [7:0] local_source_endpoint_id;
    bit local_tag_owner;
    bit [2:0] local_message_tag;
-   logic [31:0] msg_word  = 32'hC0DE_1234;
+   static logic [31:0] msg_word  = 32'hC0DE_1234;
    logic [31:0] msg_words[$];
 begin 
    local_destination_endpoint_id = upper_msg[23:16];

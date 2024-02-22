@@ -579,7 +579,7 @@ task create_vdm_err_packet;
    bit [7:0] local_source_endpoint_id;
    bit local_tag_owner;
    bit [2:0] local_message_tag;
-   logic [31:0] msg_word  = 32'hC0DE_1234;
+   static logic [31:0] msg_word  = 32'hC0DE_1234;
    logic [31:0] msg_words[$];
    logic [9:0] length;
 begin 

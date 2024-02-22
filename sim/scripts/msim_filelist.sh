@@ -24,7 +24,12 @@ $QUARTUS_ROOTDIR/eda/sim_lib/ctp_hssi_atoms_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/cta_hssi_atoms.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/cta_hssi_atoms_ncrypt.sv \
 $QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms.sv \
-$QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms_ncrypt.sv"
+$QUARTUS_ROOTDIR/eda/sim_lib/ctr_hssi_atoms_ncrypt.sv \
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/host_bfm_types_pkg.sv \
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_host.sv \
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_def_pkg_soc.sv \
+$OFS_ROOTDIR/sim/bfm/ofs_axis_bfm/pfvf_class_pkg.sv \
+"
 
 INC_DIR="+incdir+$OFS_ROOTDIR/ofs-common/src/common/includes/ \
 +incdir+$OFS_ROOTDIR/src/includes/ \

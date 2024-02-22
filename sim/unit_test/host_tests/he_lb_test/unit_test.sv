@@ -410,7 +410,7 @@ task test_mem_loopback;
    logic  [63:0] dsm_base_addr;
    logic  [31:0] old_test_err_count;
    logic  err_cl_len;
-   logic  result = 1'b1;
+   static logic  result = 1'b1;
 begin
    print_test_header(test_name);
    old_test_err_count = get_err_count();

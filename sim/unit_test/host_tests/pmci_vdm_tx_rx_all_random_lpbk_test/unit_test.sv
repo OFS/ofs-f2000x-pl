@@ -554,7 +554,7 @@ endtask
 task create_vdm_msg_rand_packet;
    input logic         has_data;
    input logic [9:0]   length;
-   logic [31:0] msg_word = 32'hC0DE_1234;
+   static logic [31:0] msg_word = 32'hC0DE_1234;
    logic [31:0] msg_words[$];
    byte_t tmp_vdm_buf[];
 begin 
