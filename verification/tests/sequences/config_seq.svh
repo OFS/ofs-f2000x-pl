@@ -101,7 +101,7 @@ class config_seq extends uvm_sequence;
         // initial port reset
 	`uvm_info(get_name(), "Port reseting", UVM_LOW)
 	// TODO
-	fork 
+/*	fork 
          begin
 	  if(tb_cfg0.enable == 1) begin
              port_rst();
@@ -114,7 +114,7 @@ class config_seq extends uvm_sequence;
          end
         join
 	`uvm_info(get_name(), "Port reset is done", UVM_LOW)
-
+*/
 	`uvm_info(get_name(), "Exiting config sequence", UVM_LOW)
     endtask : body
 

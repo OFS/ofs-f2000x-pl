@@ -62,6 +62,9 @@ class base_seq extends uvm_sequence;
           config_seq_.tb_cfg0 = this.tb_cfg0;
           config_seq_.tb_cfg1 = this.tb_cfg1;
           config_seq_.start(p_sequencer);
+	  cfg_port_rst_assert();  //SOFT_RESET_APPLIED
+          cfg_release_port_rst(); //SOFT_RESET_RELEASED
+
          tb_cfg0.PF0_VF1_BAR0 = tb_cfg0.PF0_VF0_BAR0 + (2 ** enumerate_seq::vf_size_index);
          tb_cfg0.PF0_VF2_BAR0 = tb_cfg0.PF0_VF1_BAR0 + (2 ** enumerate_seq::vf_size_index);
          tb_cfg0.HE_HSSI_BASE = tb_cfg0.PF0_VF1_BAR0;
@@ -323,6 +326,46 @@ class base_seq extends uvm_sequence;
         end
       end
    endtask : wr_rd_cmp
+
+   task cfg_port_rst_assert();
+       bit [63:0]    rdata, wdata, addr;
+       addr = tb_cfg0.PF0_BAR0+PORT_GASKET_BASE_ADDR+'h01038;	
+      `uvm_info(get_name(), $psprintf("Reset is asserted PORT_CONTROL = %0h", rdata), UVM_LOW)
+       begin
+        //wdata ='h5;
+        mmio_read64  (.addr_(addr), .data_(rdata));
+        wdata = rdata;
+        if(rdata[0] != 1) 
+         begin wdata[0] = 1'b1;
+          mmio_write64 (.addr_(addr), .data_(wdata));
+          `uvm_info(get_name(), $psprintf("Reset is asserted PORT_CONTROL = %0h", wdata), UVM_LOW)
+          while(!rdata[4])  mmio_read64  (.addr_(addr), .data_(rdata));      
+         `uvm_info(get_name(), $psprintf("SOFT_RESET_ACK is SET = %0h", rdata), UVM_LOW)
+         end
+       end
+  endtask 
+
+  task cfg_release_port_rst();
+       bit [63:0]    rdata, wdata, addr;
+       addr = tb_cfg0.PF0_BAR0+PORT_GASKET_BASE_ADDR+'h01038;	
+       begin
+       // wdata ='h4;
+        mmio_read64  (.addr_(addr), .data_(rdata));
+        wdata = rdata;
+        if(rdata[0] == 1'b1)
+	 begin
+          wdata[0] = 1'b0;
+          mmio_write64 (.addr_(addr), .data_(wdata));
+         `uvm_info(get_name(), $psprintf("Reset is de-asserted PORT_CONTROL = %0h", wdata), UVM_LOW)
+          while(rdata[4])  mmio_read64  (.addr_(addr), .data_(rdata));      
+         `uvm_info(get_name(), $psprintf("SOFT_RESET_ACK is released = %0h", rdata), UVM_LOW)
+         end
+       end
+       `uvm_info(get_name(), $psprintf("PortSoftResetAck is asserted  PORT_CONTROL = %0h", rdata), UVM_LOW)
+            #1us;
+  endtask : cfg_release_port_rst
+
+
   task port_rst_assert();
        bit [63:0]    rdata, wdata, addr;
        addr = tb_cfg0.PF0_BAR0+PORT_GASKET_BASE_ADDR+'h1038;	
